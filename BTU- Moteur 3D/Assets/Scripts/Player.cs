@@ -3,13 +3,17 @@ using System.Collections.Generic;
 using System.Security.Cryptography;
 using System.Threading;
 using UnityEngine;
+using System.Diagnostics;
 
 public class Player : MonoBehaviour
 {
     [SerializeField] Camera m_MainCamera;
     [SerializeField] int m_VerticalSpeed;
     [SerializeField] int m_HorizontalSpeed;
+    [SerializeField] float m_fireRate;
+    [SerializeField] Bullet m_bulletPrefab;
 
+    Stopwatch stopWatch;
 
     //Controle du vaisseau
     void PlayerControl()
@@ -40,7 +44,7 @@ public class Player : MonoBehaviour
             float verticalInput = Input.GetAxis("Vertical");
             transform.Translate(new Vector3(0, verticalInput, 0) * m_HorizontalSpeed * Time.deltaTime);
         }
-        /*
+        
         if(Input.GetAxis("Fire1") && m_fireTimer.ElapsedMilliseconds > m_FireRate)
         {
             Bullet bullet = Instantiate(m_BulletPrefab).GetComponent<bullet>();
@@ -48,17 +52,19 @@ public class Player : MonoBehaviour
             bullet.OnHit += OnBulletHit;
 
             m_FireTimer.Restart();
-        }*/
+        }
 
     }
 
+    void Awake()
+    {
+        stopWatch = new Stopwatch();
+        stopWatch.Start();
+    }
 
     // Start is called before the first frame update
     void Start()
     {
-
-
-
     }
 
     // Update is called once per frame
