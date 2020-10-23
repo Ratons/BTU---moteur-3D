@@ -1,9 +1,10 @@
-﻿/*using System.Collections;
+﻿using System.Collections;
 using System.Collections.Generic;
 using System.Security.Cryptography;
 using System.Threading;
 using UnityEngine;
 using System.Diagnostics;
+using static Bullet;
 
 public class Player : MonoBehaviour
 {
@@ -46,13 +47,13 @@ public class Player : MonoBehaviour
             transform.Translate(new Vector3(0, verticalInput, 0) * m_HorizontalSpeed * Time.deltaTime);
         }
         
-        if(Input.GetAxis("Fire1") && m_fireTimer.ElapsedMilliseconds > m_FireRate)
+        if(Input.GetAxis("Fire1") >0 && m_fireTimer.ElapsedMilliseconds > m_fireRate)
         {
-            Bullet bullet = Instantiate(m_BulletPrefab).GetComponent<bullet>();
-            bullet.transform.position = transform.position;
-            bullet.OnHit += OnBulletHit;
+          Bullet bullet = Instantiate(m_bulletPrefab).GetComponent<Bullet>();
+          bullet.transform.position = transform.position;
+          //bullet.OnHit += OnBulletHit;
 
-            m_FireTimer.Restart();
+            m_fireTimer.Restart();
         }
 
     }
@@ -74,4 +75,3 @@ public class Player : MonoBehaviour
         PlayerControl();
     }
 }
-*/

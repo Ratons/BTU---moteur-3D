@@ -38,10 +38,22 @@ public class ScenesManager : EditorWindow
 
     private void OnGUI()
     {
+        string longString = "This is a long-ish string";
+        Vector2 scrollPosition = Vector2.zero;
+
         GUILayout.BeginVertical();
         GUILayout.Label("hello world!");
         if (GUILayout.Button("click"))
-            Debug.Log("The cake is a lie");
+        {
+            scrollPosition = GUILayout.BeginScrollView(
+                 scrollPosition, GUILayout.Width(100), GUILayout.Height(100));
+
+
+
+            GUILayout.EndScrollView();
+
+        }
+
         GUILayout.EndVertical();
     }
 
