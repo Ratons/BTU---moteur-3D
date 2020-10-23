@@ -1,4 +1,4 @@
-﻿using System.Collections;
+﻿/*using System.Collections;
 using System.Collections.Generic;
 using System.Security.Cryptography;
 using System.Threading;
@@ -11,6 +11,7 @@ public class Player : MonoBehaviour
     [SerializeField] int m_VerticalSpeed;
     [SerializeField] int m_HorizontalSpeed;
     [SerializeField] float m_fireRate;
+    [SerializeField] Stopwatch m_fireTimer;
     [SerializeField] Bullet m_bulletPrefab;
 
     Stopwatch stopWatch;
@@ -73,3 +74,4 @@ public class Player : MonoBehaviour
         PlayerControl();
     }
 }
+*/
