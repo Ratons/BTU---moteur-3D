@@ -12,9 +12,9 @@ public class Bullet : MonoBehaviour
     {
         transform.Translate(new Vector3(0, 1, 0) * m_BulletSpeed * Time.deltaTime);
 
-        if (transform.position.y > Screen.height +1) // condition percuter un ennemi
+        if (transform.position.y > 15) // condition percuter un ennemi
         {
-            Destroy(this);
+            Destroy(this.gameObject);
         }
     }
 

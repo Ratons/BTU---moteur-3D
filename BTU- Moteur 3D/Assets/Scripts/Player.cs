@@ -12,16 +12,16 @@ public class Player : MonoBehaviour
     [SerializeField] int m_VerticalSpeed;
     [SerializeField] int m_HorizontalSpeed;
     [SerializeField] float m_fireRate;
-    [SerializeField] Stopwatch m_fireTimer;
-    [SerializeField] Bullet m_bulletPrefab;
+    [SerializeField] GameObject m_bulletPrefab;
 
     Stopwatch stopWatch;
+    Stopwatch m_fireTimer;
 
     //Controle du vaisseau
     void PlayerControl()
     {
         //Horizontal
-        if(Input.GetAxis("Horizontal") < 0 && 
+        if (Input.GetAxis("Horizontal") < 0 && 
             m_MainCamera.WorldToScreenPoint(transform.position).x > m_HorizontalSpeed * Time.deltaTime)
         {
             float horizontalInput = Input.GetAxis("Horizontal");
@@ -47,11 +47,13 @@ public class Player : MonoBehaviour
             transform.Translate(new Vector3(0, verticalInput, 0) * m_HorizontalSpeed * Time.deltaTime);
         }
         
-        if(Input.GetAxis("Fire1") >0 && m_fireTimer.ElapsedMilliseconds > m_fireRate)
+        if(Input.GetAxis("Fire1") > 0 && m_fireTimer.ElapsedMilliseconds > m_fireRate)
         {
-          Bullet bullet = Instantiate(m_bulletPrefab).GetComponent<Bullet>();
-          bullet.transform.position = transform.position;
-          //bullet.OnHit += OnBulletHit;
+
+            Bullet bullet = Instantiate(m_bulletPrefab).GetComponent<Bullet>();
+            //Instantiate(m_bulletPrefab, transform.position, Quaternion.identity);
+            bullet.transform.position = transform.position;
+            //bullet.OnHit += OnBulletHit;
 
             m_fireTimer.Restart();
         }
@@ -62,6 +64,9 @@ public class Player : MonoBehaviour
     {
         stopWatch = new Stopwatch();
         stopWatch.Start();
+
+        m_fireTimer = new Stopwatch();
+        m_fireTimer.Start();
     }
 
     // Start is called before the first frame update
