@@ -4,8 +4,14 @@ using UnityEngine;
 
 public class Enemy : MonoBehaviour
 {
+    Rigidbody2D rb;
     [SerializeField] float m_enemySpeed;
     // Start is called before the first frame update
+    void Awake()
+    {
+        rb = GetComponent<Rigidbody2D>();
+    }
+
     void EnemyControl()
     {
         if(this.transform.position.y <= -2)
@@ -23,5 +29,25 @@ public class Enemy : MonoBehaviour
     void Update()
     {
         EnemyControl();
+    }
+
+    void OnCollisionEnter2D(Collision2D col)
+    {
+        if (col.gameObject.tag == "player")
+        {
+            col.gameObject.GetComponent<Player>().Damage();
+            Die();
+        }
+        if(col.gameObject.tag == "bullet")
+        {
+            //add score
+            col.gameObject.GetComponent<Bullet>().Die();
+            Die();
+        }
+    }
+
+    void Die()
+    {
+        Destroy(gameObject);
     }
 }

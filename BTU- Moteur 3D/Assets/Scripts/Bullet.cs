@@ -5,8 +5,14 @@ using UnityEngine;
 public class Bullet : MonoBehaviour
 
 {
+    Rigidbody2D rb;
     [SerializeField] int m_BulletSpeed;
     [SerializeField] int m_BulletSize;
+
+    void Awake()
+    {
+        rb = GetComponent<Rigidbody2D>();
+    }
 
     void BulletControl()
     {
@@ -16,11 +22,6 @@ public class Bullet : MonoBehaviour
         {
             Destroy(this.gameObject);
         }
-    }
-
-    void OnHit()
-    {
-
     }
 
     // Start is called before the first frame update
@@ -33,5 +34,10 @@ public class Bullet : MonoBehaviour
     void Update()
     {
         BulletControl();
+    }
+
+    public void Die()
+    {
+        Destroy(gameObject);
     }
 }

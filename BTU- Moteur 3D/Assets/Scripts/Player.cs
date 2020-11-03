@@ -13,9 +13,12 @@ public class Player : MonoBehaviour
     [SerializeField] int m_HorizontalSpeed;
     [SerializeField] float m_fireRate;
     [SerializeField] GameObject m_bulletPrefab;
+    [SerializeField] int health;
 
+    Rigidbody2D rb;
     Stopwatch stopWatch;
     Stopwatch m_fireTimer;
+    int m_score = 0;
 
     //Controle du vaisseau
     void PlayerControl()
@@ -62,6 +65,7 @@ public class Player : MonoBehaviour
 
     void Awake()
     {
+        rb = GetComponent<Rigidbody2D>();
         stopWatch = new Stopwatch();
         stopWatch.Start();
 
@@ -78,5 +82,18 @@ public class Player : MonoBehaviour
     void Update()
     {
         PlayerControl();
+    }
+
+    public void Damage()
+    {
+        health--;
+        if (health == 0)
+            Destroy(gameObject);
+    }
+
+    public void Score()
+    {
+        m_score += 100;
+        print(m_score);
     }
 }
