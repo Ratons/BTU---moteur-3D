@@ -5704,7 +5704,7 @@ MonoBehaviour:
   m_HorizontalSpeed: 3
   m_fireRate: 500
   m_bulletPrefab: {fileID: 8446665726669026650, guid: 2e0c74e3e134dc14f960ff7a98b3ac8a, type: 3}
-  health: 1
+  health: 3
 --- !u!60 &1057240367
 PolygonCollider2D:
   m_ObjectHideFlags: 0
@@ -5751,7 +5751,7 @@ Rigidbody2D:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1057240365}
-  m_BodyType: 2
+  m_BodyType: 0
   m_Simulated: 1
   m_UseFullKinematicContacts: 0
   m_UseAutoMass: 0
@@ -5773,7 +5773,7 @@ Transform:
   m_GameObject: {fileID: 1057240365}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: -0, z: 0}
-  m_LocalScale: {x: 3, y: 3, z: 3}
+  m_LocalScale: {x: 2, y: 2, z: 2}
   m_Children:
   - {fileID: 452384715}
   m_Father: {fileID: 0}
@@ -5974,7 +5974,7 @@ MonoBehaviour:
   - {fileID: 5088786314270485048, guid: 39e61a064c5f3fa4a8a1a30b802768d4, type: 3}
   - {fileID: 645961162361684333, guid: cbc3f39af77906d43b0f40d8120083c3, type: 3}
   - {fileID: 3618240890456556932, guid: f3e7b5a7a7755044e987e243786abef3, type: 3}
-  m_spawnRate: 1
+  m_spawnRate: 2
 --- !u!4 &1204682410
 Transform:
   m_ObjectHideFlags: 0

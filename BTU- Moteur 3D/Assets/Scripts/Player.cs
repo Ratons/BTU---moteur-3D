@@ -54,7 +54,7 @@ public class Player : MonoBehaviour
         {
 
             Bullet bullet = Instantiate(m_bulletPrefab).GetComponent<Bullet>();
-            bullet.transform.position = transform.position + new Vector3(0,3,0);
+            bullet.transform.position = transform.position + new Vector3(0,1,0);
 
             m_fireTimer.Restart();
         }

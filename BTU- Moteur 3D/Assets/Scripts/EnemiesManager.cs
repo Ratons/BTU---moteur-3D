@@ -19,7 +19,7 @@ public class EnemiesManager : MonoBehaviour
         {
             //SpawnEnemy
             if (Application.isPlaying)
-                Instantiate(m_enemy[(int)Random.Range(0, m_enemy.Length)], new Vector3(Random.Range(-5, 6), 15, 0), Quaternion.identity);
+                Instantiate(m_enemy[(int)Random.Range(0, m_enemy.Length)], new Vector3(Random.Range(-6, 6), 15, 0), Quaternion.identity);
             yield return new WaitForSeconds(m_spawnRate);
         }
     }
