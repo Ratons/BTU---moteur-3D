@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 7793170277492039104}
   - component: {fileID: 594232263529306892}
   - component: {fileID: -2035834937453239312}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Bullet
   m_TagString: bullet
   m_Icon: {fileID: 0}
@@ -48,6 +48,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_BulletSpeed: 2
   m_BulletSize: 1
+  direction: 1
 --- !u!50 &594232263529306892
 Rigidbody2D:
   serializedVersion: 4
@@ -95,6 +96,10 @@ PrefabInstance:
     - target: {fileID: 31716220580223547, guid: b8f506984778e0047b7ee39fd08681da, type: 3}
       propertyPath: m_Name
       value: Mesh
+      objectReference: {fileID: 0}
+    - target: {fileID: 31716220580223547, guid: b8f506984778e0047b7ee39fd08681da, type: 3}
+      propertyPath: m_Layer
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 3493640344259673201, guid: b8f506984778e0047b7ee39fd08681da, type: 3}
       propertyPath: m_LocalPosition.x

@@ -4,8 +4,8 @@ using UnityEngine;
 
 public class EnemiesManager : MonoBehaviour
 {
-    [SerializeField] Enemy m_enemy;
-    [SerializeField] float m_spawnTime;
+    [SerializeField] GameObject[] m_enemy;
+    [SerializeField] float m_spawnRate;
 
     // Start is called before the first frame update
     void Start()
@@ -19,8 +19,8 @@ public class EnemiesManager : MonoBehaviour
         {
             //SpawnEnemy
             if (Application.isPlaying)
-                Instantiate(m_enemy, this.transform.position, Quaternion.identity);
-            yield return new WaitForSeconds(m_spawnTime);
+                Instantiate(m_enemy[(int)Random.Range(0, m_enemy.Length)], new Vector3(Random.Range(-5, 6), 15, 0), Quaternion.identity);
+            yield return new WaitForSeconds(m_spawnRate);
         }
     }
 

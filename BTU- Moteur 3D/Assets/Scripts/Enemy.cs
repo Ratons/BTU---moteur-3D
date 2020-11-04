@@ -6,6 +6,10 @@ public class Enemy : MonoBehaviour
 {
     Rigidbody2D rb;
     [SerializeField] float m_enemySpeed;
+    [SerializeField] int m_health;
+    [SerializeField] bool canShoot;
+    [SerializeField] int fireRate;
+    [SerializeField] GameObject bulletPrefab;
     // Start is called before the first frame update
     void Awake()
     {
@@ -22,7 +26,14 @@ public class Enemy : MonoBehaviour
 
     void Start()
     {
-        
+        if(canShoot)
+            InvokeRepeating("Shoot", fireRate, fireRate);
+    }
+
+    void Shoot()
+    {
+        Bullet bullet = Instantiate(bulletPrefab).GetComponent<Bullet>();
+        bullet.transform.position = transform.position + new Vector3(0, -1f, 0);
     }
 
     // Update is called once per frame
@@ -33,17 +44,18 @@ public class Enemy : MonoBehaviour
 
     void OnCollisionEnter2D(Collision2D col)
     {
-        if (col.gameObject.tag == "player")
+        if (col.gameObject.tag == "Player")
         {
             col.gameObject.GetComponent<Player>().Damage();
             Die();
         }
-        if(col.gameObject.tag == "bullet")
-        {
-            //add score
-            col.gameObject.GetComponent<Bullet>().Die();
+    }
+
+    public void Damage()
+    {
+        m_health--;
+        if (m_health == 0)
             Die();
-        }
     }
 
     void Die()

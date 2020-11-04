@@ -88,10 +88,4 @@ public class Player : MonoBehaviour
         if (health == 0)
             Destroy(gameObject);
     }
-
-    public void Score()
-    {
-        m_score += 100;
-        print(m_score);
-    }
 }
