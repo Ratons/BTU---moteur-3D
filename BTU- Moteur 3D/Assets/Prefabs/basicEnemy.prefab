@@ -48,6 +48,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_enemySpeed: 1
   m_health: 1
+  canShoot: 0
+  fireRate: 0
+  bulletPrefab: {fileID: 0}
+  score: 10
 --- !u!50 &-4080734527738693335
 Rigidbody2D:
   serializedVersion: 4

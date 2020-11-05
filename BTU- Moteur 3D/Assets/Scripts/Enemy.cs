@@ -10,6 +10,7 @@ public class Enemy : MonoBehaviour
     [SerializeField] bool canShoot;
     [SerializeField] int fireRate;
     [SerializeField] GameObject bulletPrefab;
+    [SerializeField] int score;
     // Start is called before the first frame update
     void Awake()
     {
@@ -60,6 +61,7 @@ public class Enemy : MonoBehaviour
 
     void Die()
     {
+        PlayerScore.Score += score;
         Destroy(gameObject);
     }
 }

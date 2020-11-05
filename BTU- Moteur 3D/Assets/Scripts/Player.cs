@@ -18,7 +18,6 @@ public class Player : MonoBehaviour
     Rigidbody2D rb;
     Stopwatch stopWatch;
     Stopwatch m_fireTimer;
-    int m_score = 0;
 
     //Controle du vaisseau
     void PlayerControl()
@@ -70,6 +69,7 @@ public class Player : MonoBehaviour
         m_fireTimer = new Stopwatch();
         m_fireTimer.Start();
     }
+
 
     // Start is called before the first frame update
     void Start()

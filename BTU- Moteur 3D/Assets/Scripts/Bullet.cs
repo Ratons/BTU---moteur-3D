@@ -47,9 +47,14 @@ public class Bullet : MonoBehaviour
             col.gameObject.GetComponent<Player>().Damage();
             Die();
         }
-        if (col.gameObject.tag == "Enemy")
+        else if (col.gameObject.tag == "Enemy")
         {
             col.gameObject.GetComponent<Enemy>().Damage();
+            Die();
+        }
+        else if (col.gameObject.tag == "Boss")
+        {
+            col.gameObject.GetComponent<Boss>().Damage();
             Die();
         }
     }
