@@ -5,6 +5,7 @@ using System.Threading;
 using UnityEngine;
 using System.Diagnostics;
 using static Bullet;
+using UnityEngine.UI;
 
 public class Player : MonoBehaviour
 {
@@ -14,6 +15,14 @@ public class Player : MonoBehaviour
     [SerializeField] float m_fireRate;
     [SerializeField] GameObject m_bulletPrefab;
     [SerializeField] int health;
+    [SerializeField] int numOfHearts;
+
+
+    [SerializeField] Image[] hearts;
+    [SerializeField] Sprite fullHeart;
+    [SerializeField] Sprite emptyHeart;
+
+    [SerializeField] GameObject EndGameMenu;
 
     Rigidbody2D rb;
     Stopwatch stopWatch;
@@ -70,10 +79,37 @@ public class Player : MonoBehaviour
         m_fireTimer.Start();
     }
 
+    void HealthManagement()
+    {
+        if (health > numOfHearts)
+        {
+            health = numOfHearts;
+        }
 
+        for (int i = 0; i < hearts.Length; i++)
+        {
+            if (i < health)
+            {
+                hearts[i].sprite = fullHeart;
+            }
+            else
+            {
+                hearts[i].sprite = emptyHeart;
+            }
+            if (i < numOfHearts)
+            {
+                hearts[i].enabled = true;
+            }
+            else
+            {
+                hearts[i].enabled = false;
+            }
+        }
+    }
     // Start is called before the first frame update
     void Start()
     {
+        HealthManagement();
     }
 
     // Update is called once per frame
@@ -85,7 +121,11 @@ public class Player : MonoBehaviour
     public void Damage()
     {
         health--;
+        HealthManagement();
         if (health == 0)
+        {
+            EndGameMenu.SetActive(true);
             Destroy(gameObject);
+        }
     }
 }
