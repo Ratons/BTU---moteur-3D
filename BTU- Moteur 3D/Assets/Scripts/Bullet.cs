@@ -22,7 +22,7 @@ public class Bullet : MonoBehaviour
         if(direction==false)
             transform.Translate(new Vector3(0, -1, 0) * m_BulletSpeed * Time.deltaTime);
 
-        if (transform.position.y > 15) // condition percuter un ennemi
+        if (transform.position.y > 11) // condition percuter un ennemi
         {
             Destroy(this.gameObject);
         }

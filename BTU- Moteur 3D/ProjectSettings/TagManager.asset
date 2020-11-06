@@ -39,8 +39,8 @@ TagManager:
   - 
   - 
   - 
-  - 
-  - 
+  - Bornes
+  - PostProcessing
   - 
   m_SortingLayers:
   - name: Default

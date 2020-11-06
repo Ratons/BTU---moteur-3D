@@ -34,14 +34,14 @@ public class Player : MonoBehaviour
     void PlayerControl()
     {
         //Horizontal
-        if (Input.GetAxis("Horizontal") < 0 && 
-            m_MainCamera.WorldToScreenPoint(transform.position).x > m_HorizontalSpeed * Time.deltaTime)
+        if (Input.GetAxis("Horizontal") < 0 &&
+            transform.position.x > -6)
         {
             float horizontalInput = Input.GetAxis("Horizontal");
             transform.Translate(new Vector3(horizontalInput, 0, 0) * m_HorizontalSpeed * Time.deltaTime);
         }
         if (Input.GetAxis("Horizontal") > 0 &&
-            m_MainCamera.WorldToScreenPoint(transform.position).x < Screen.width - m_HorizontalSpeed * Time.deltaTime)
+            transform.position.x < 6)
         {
             float horizontalInput = Input.GetAxis("Horizontal");
             transform.Translate(new Vector3(horizontalInput, 0, 0) * m_HorizontalSpeed * Time.deltaTime);
