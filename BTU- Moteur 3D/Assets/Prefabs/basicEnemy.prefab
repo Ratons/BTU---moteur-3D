@@ -52,6 +52,8 @@ MonoBehaviour:
   fireRate: 0
   bulletPrefab: {fileID: 0}
   score: 10
+  m_booster:
+  - {fileID: 610484604960533432, guid: 472d197ac56a882458469c38aafede4a, type: 3}
 --- !u!50 &-4080734527738693335
 Rigidbody2D:
   serializedVersion: 4

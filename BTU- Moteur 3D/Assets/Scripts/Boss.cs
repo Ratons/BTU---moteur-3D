@@ -10,6 +10,8 @@ public class Boss : MonoBehaviour
     [SerializeField] int fireRate;
     [SerializeField] GameObject bulletPrefab;
     [SerializeField] int score;
+    [SerializeField] GameObject[] m_booster;
+
     // Start is called before the first frame update
     void Awake()
     {
@@ -51,20 +53,27 @@ public class Boss : MonoBehaviour
         if (col.gameObject.tag == "Player")
         {
             col.gameObject.GetComponent<Player>().Damage();
-            Die();
+            Damage(Player.damage);
         }
     }
 
-    public void Damage()
+    public void Damage(int degats)
     {
-        m_health--;
-        if (m_health == 0)
+        m_health-=degats;
+        if (m_health <= 0)
             Die();
     }
 
     void Die()
     {
         PlayerScore.Score += score;
+        BoosterSpawn();
+        Spawner.enemyLeft --;
         Destroy(gameObject);
+    }
+
+    void BoosterSpawn()
+    {
+        Instantiate(m_booster[(int)Random.Range(0, m_booster.Length)], transform.position, Quaternion.identity);
     }
 }

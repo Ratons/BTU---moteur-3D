@@ -11,6 +11,8 @@ public class Enemy : MonoBehaviour
     [SerializeField] int fireRate;
     [SerializeField] GameObject bulletPrefab;
     [SerializeField] int score;
+    [SerializeField] GameObject[] m_booster;
+
     // Start is called before the first frame update
     void Awake()
     {
@@ -19,8 +21,11 @@ public class Enemy : MonoBehaviour
 
     void EnemyControl()
     {
-        if(this.transform.position.y <= -2)
+        if (this.transform.position.y <= -2)
+        {
+            PlayerScore.Score -= score;
             Destroy(this.gameObject);
+        }
         else
             transform.Translate(new Vector3(0, -1, 0) * m_enemySpeed * Time.deltaTime);
     }
@@ -52,16 +57,23 @@ public class Enemy : MonoBehaviour
         }
     }
 
-    public void Damage()
+    public void Damage(int degats)
     {
-        m_health--;
-        if (m_health == 0)
+        m_health-=degats;
+        if (m_health <= 0)
             Die();
     }
 
     void Die()
     {
         PlayerScore.Score += score;
+        if (Random.Range(0, 100) < 5)
+            BoosterSpawn();
         Destroy(gameObject);
+    }
+
+    void BoosterSpawn()
+    {
+        Instantiate(m_booster[(int)Random.Range(0, m_booster.Length)], transform.position, Quaternion.identity);
     }
 }

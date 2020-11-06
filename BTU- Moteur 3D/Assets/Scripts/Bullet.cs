@@ -49,12 +49,12 @@ public class Bullet : MonoBehaviour
         }
         else if (col.gameObject.tag == "Enemy")
         {
-            col.gameObject.GetComponent<Enemy>().Damage();
+            col.gameObject.GetComponent<Enemy>().Damage(Player.damage);
             Die();
         }
         else if (col.gameObject.tag == "Boss")
         {
-            col.gameObject.GetComponent<Boss>().Damage();
+            col.gameObject.GetComponent<Boss>().Damage(Player.damage);
             Die();
         }
     }

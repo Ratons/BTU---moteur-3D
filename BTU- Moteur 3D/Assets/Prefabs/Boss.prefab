@@ -84,10 +84,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_enemySpeed: 2
-  m_health: 50
-  fireRate: 500
+  m_health: 25
+  fireRate: 3
   bulletPrefab: {fileID: 5995896640291371949, guid: e830629acce5f214fab661273f3ee03a, type: 3}
   score: 1000
+  m_booster:
+  - {fileID: 610484604960533432, guid: 472d197ac56a882458469c38aafede4a, type: 3}
 --- !u!1001 &5056298752590464196
 PrefabInstance:
   m_ObjectHideFlags: 0

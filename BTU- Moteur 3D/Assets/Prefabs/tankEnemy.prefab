@@ -77,7 +77,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6473234862559301861, guid: 39e61a064c5f3fa4a8a1a30b802768d4, type: 3}
       propertyPath: m_enemySpeed
-      value: 0.5
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 6473234862559301861, guid: 39e61a064c5f3fa4a8a1a30b802768d4, type: 3}
       propertyPath: score

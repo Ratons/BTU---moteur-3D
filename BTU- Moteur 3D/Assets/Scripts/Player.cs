@@ -17,6 +17,8 @@ public class Player : MonoBehaviour
     [SerializeField] int health;
     [SerializeField] int numOfHearts;
 
+    public static int damage = 1;
+
 
     [SerializeField] Image[] hearts;
     [SerializeField] Sprite fullHeart;
@@ -127,5 +129,10 @@ public class Player : MonoBehaviour
             EndGameMenu.SetActive(true);
             Destroy(gameObject);
         }
+    }
+
+    public void AddDamage()
+    {
+        damage++;
     }
 }
