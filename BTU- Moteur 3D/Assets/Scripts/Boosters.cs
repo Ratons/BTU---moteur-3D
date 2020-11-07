@@ -6,6 +6,7 @@ public class Boosters : MonoBehaviour
 {
     Rigidbody2D rb;
     [SerializeField] float m_boosterSpeed;
+    [SerializeField] string boosterName;
 
     void Awake()
     {
@@ -36,7 +37,18 @@ public class Boosters : MonoBehaviour
     {
         if (col.gameObject.tag == "Player")
         {
-            col.gameObject.GetComponent<Player>().AddDamage();
+            if(boosterName == "damage")
+                col.gameObject.GetComponent<Player>().AddDamage();
+            else if(boosterName == "attackSpeed")
+                col.gameObject.GetComponent<Player>().AddAttackSpeed();
+            else if (boosterName == "health")
+                col.gameObject.GetComponent<Player>().AddHealth();
+            else if (boosterName == "maxHealth")
+                col.gameObject.GetComponent<Player>().AddMaxHealth();
+            else if (boosterName == "speed")
+                col.gameObject.GetComponent<Player>().AddSpeed();
+            else if (boosterName == "multishot")
+                col.gameObject.GetComponent<Player>().AddMultishot();
             Destroy(this.gameObject);
         }
     }

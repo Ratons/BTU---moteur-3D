@@ -10,14 +10,15 @@ using UnityEngine.UI;
 public class Player : MonoBehaviour
 {
     [SerializeField] Camera m_MainCamera;
-    [SerializeField] int m_VerticalSpeed;
-    [SerializeField] int m_HorizontalSpeed;
+    [SerializeField] float m_VerticalSpeed;
+    [SerializeField] float m_HorizontalSpeed;
     [SerializeField] float m_fireRate;
     [SerializeField] GameObject m_bulletPrefab;
     [SerializeField] int health;
     [SerializeField] int numOfHearts;
 
     public static int damage = 1;
+    bool multishot = false;
 
 
     [SerializeField] Image[] hearts;
@@ -62,9 +63,19 @@ public class Player : MonoBehaviour
         
         if(Input.GetAxis("Fire1") > 0 && m_fireTimer.ElapsedMilliseconds > m_fireRate)
         {
+            if(multishot == false)
+            {
+                Bullet bullet = Instantiate(m_bulletPrefab).GetComponent<Bullet>();
+                bullet.transform.position = transform.position + new Vector3(0, 1, 0);
+            }
+            else
+            {
+                Bullet bullet = Instantiate(m_bulletPrefab).GetComponent<Bullet>();
+                bullet.transform.position = transform.position + new Vector3(0.5f, 1, 0);
 
-            Bullet bullet = Instantiate(m_bulletPrefab).GetComponent<Bullet>();
-            bullet.transform.position = transform.position + new Vector3(0,1,0);
+                Bullet bullet2 = Instantiate(m_bulletPrefab).GetComponent<Bullet>();
+                bullet2.transform.position = transform.position + new Vector3(-0.5f, 1, 0);
+            }
 
             m_fireTimer.Restart();
         }
@@ -134,5 +145,39 @@ public class Player : MonoBehaviour
     public void AddDamage()
     {
         damage++;
+    }
+
+    public void AddHealth()
+    {
+        if (health < numOfHearts)
+        {
+            health++;
+            HealthManagement();
+        }
+    }
+
+    public void AddMaxHealth()
+    {
+        if (numOfHearts < 10)
+        { 
+            numOfHearts++;
+            HealthManagement();
+        }
+    }
+
+    public void AddSpeed()
+    {
+        m_VerticalSpeed += 0.2f;
+        m_HorizontalSpeed += 0.2f;
+    }
+
+    public void AddAttackSpeed()
+    {
+        m_fireRate -= 25;
+    }
+
+    public void AddMultishot()
+    {
+        multishot = true;
     }
 }

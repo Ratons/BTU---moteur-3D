@@ -67,7 +67,8 @@ public class Boss : MonoBehaviour
     void Die()
     {
         PlayerScore.Score += score;
-        BoosterSpawn();
+        if (Random.Range(0, 100) < 50)
+            BoosterSpawn();
         Spawner.enemyLeft --;
         Destroy(gameObject);
     }
