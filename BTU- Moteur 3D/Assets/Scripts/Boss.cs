@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using System.Diagnostics;
 
 public class Boss : MonoBehaviour
 {
@@ -11,11 +12,18 @@ public class Boss : MonoBehaviour
     [SerializeField] GameObject bulletPrefab;
     [SerializeField] int score;
     [SerializeField] GameObject[] m_booster;
+    [SerializeField] string type;
+
+    Stopwatch m_fireTimer;
+    int direction = 1;
 
     // Start is called before the first frame update
     void Awake()
     {
         rb = GetComponent<Rigidbody2D>();
+
+        m_fireTimer = new Stopwatch();
+        m_fireTimer.Start();
     }
 
     void EnemyControl()
@@ -24,6 +32,16 @@ public class Boss : MonoBehaviour
             Destroy(this.gameObject);
         else
             transform.Translate(new Vector3(0, -1, 0) * m_enemySpeed * Time.deltaTime);
+    }
+
+    void EnemyControlX()
+    {
+        if (m_fireTimer.ElapsedMilliseconds > 5000)
+        {
+            direction *= -1;
+            m_fireTimer.Restart();
+        }
+        transform.Translate(new Vector3(direction, 0, 0) * m_enemySpeed * Time.deltaTime);
     }
 
     void Start()
@@ -44,8 +62,24 @@ public class Boss : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (transform.position.y >= 7)
-            EnemyControl();       
+        if (type == "boss1")
+        {
+            if (transform.position.y >= 7)
+                EnemyControl();
+        }
+        if (type == "minions")
+        {
+            if (transform.position.y >= 6)
+                EnemyControl();
+        }
+        if (type == "boss2")
+        {
+            if (transform.position.y >= 7)
+                EnemyControl();
+            else
+                EnemyControlX();
+
+        }
     }
 
     void OnCollisionEnter2D(Collision2D col)

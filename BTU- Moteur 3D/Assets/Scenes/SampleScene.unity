@@ -4413,10 +4413,13 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_enemy:
   - {fileID: 5088786314270485048, guid: 39e61a064c5f3fa4a8a1a30b802768d4, type: 3}
-  - {fileID: 645961162361684333, guid: cbc3f39af77906d43b0f40d8120083c3, type: 3}
   - {fileID: 3618240890456556932, guid: f3e7b5a7a7755044e987e243786abef3, type: 3}
+  - {fileID: 645961162361684333, guid: cbc3f39af77906d43b0f40d8120083c3, type: 3}
   m_boss:
   - {fileID: 6520106507906138200, guid: d0fe0c0ca81f654469b0a89940477db2, type: 3}
+  - {fileID: 5124254992620337180, guid: d5a76e695cb8ef34287f66955890322b, type: 3}
+  m_minions:
+  - {fileID: 5453279470921183344, guid: d6e3f1a7bca4db8488a60d932648b71b, type: 3}
   timeBetweenWaves: 5
   countdown: 2
   m_spawnRate: 0.5
