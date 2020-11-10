@@ -123,6 +123,12 @@ public class Player : MonoBehaviour
     void Start()
     {
         HealthManagement();
+
+        //On assure que le jeu n'est pas figé et on reset le score à 0
+        Time.timeScale = 1f;
+        PauseMenuScript.GameIsPaused = false;
+        AudioListener.pause = false;
+        PlayerScore.Score = 0;
     }
 
     // Update is called once per frame
@@ -138,6 +144,9 @@ public class Player : MonoBehaviour
         if (health == 0)
         {
             EndGameMenu.SetActive(true);
+            Time.timeScale = 0f;
+            PauseMenuScript.GameIsPaused = true;
+            AudioListener.pause = true;
             Destroy(gameObject);
         }
     }
@@ -179,5 +188,15 @@ public class Player : MonoBehaviour
     public void AddMultishot()
     {
         multishot = true;
+    }
+
+    public float GetSpeed()
+    {
+        return m_HorizontalSpeed;
+    }
+
+    public float GetFireSpeed()
+    {
+        return m_fireRate;
     }
 }

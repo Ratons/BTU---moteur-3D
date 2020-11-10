@@ -7,7 +7,6 @@ public class PlayerScore : MonoBehaviour
 {
     public GameObject ScoreText;
     public static int Score=0;
-    // Start is called before the first frame update
 
     void Update()
     {
