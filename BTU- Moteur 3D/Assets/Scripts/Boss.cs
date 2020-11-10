@@ -7,7 +7,7 @@ public class Boss : MonoBehaviour
 {
     Rigidbody2D rb;
     [SerializeField] float m_enemySpeed;
-    [SerializeField] int m_health;
+    [SerializeField] public static int m_health;
     [SerializeField] int fireRate;
     [SerializeField] GameObject bulletPrefab;
     [SerializeField] int score;

@@ -6,7 +6,7 @@ public class Enemy : MonoBehaviour
 {
     Rigidbody2D rb;
     [SerializeField] float m_enemySpeed;
-    [SerializeField] int m_health;
+    [SerializeField] public static int m_health;
     [SerializeField] bool canShoot;
     [SerializeField] int fireRate;
     [SerializeField] GameObject bulletPrefab;
@@ -32,7 +32,7 @@ public class Enemy : MonoBehaviour
 
     void Start()
     {
-        if(canShoot)
+        if (canShoot)
             InvokeRepeating("Shoot", fireRate, fireRate);
     }
 
@@ -59,7 +59,7 @@ public class Enemy : MonoBehaviour
 
     public void Damage(int degats)
     {
-        m_health-=degats;
+        m_health -= degats;
         if (m_health <= 0)
             Die();
     }

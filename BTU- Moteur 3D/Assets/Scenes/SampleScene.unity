@@ -4928,6 +4928,10 @@ MonoBehaviour:
   timeBetweenWaves: 5
   countdown: 2
   m_spawnRate: 0.5
+  wavePattern:
+  - random
+  - sinus
+  - line
 --- !u!4 &1240755692 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: c0683e84ceff9d14cb56962d2738627b, type: 3}
