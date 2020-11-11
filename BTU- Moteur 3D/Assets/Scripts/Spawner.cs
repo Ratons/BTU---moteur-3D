@@ -13,12 +13,13 @@ public class Spawner : MonoBehaviour
     [SerializeField] string[] wavePattern;
 
     public static int enemyLeft = 0;
-    
 
+    int spawnRateLine = 2;
     int waveNumber = 0;
     int waveNumberBis = 0;
     int bossWave = 5;
     int index;
+    int direction = 1;
 
     void Update()
     {
@@ -39,34 +40,57 @@ public class Spawner : MonoBehaviour
         if (waveNumberBis % bossWave == 0)
         {
             SpawnBoss(waveNumberBis);
-            Enemy.m_health++;
-            Boss.m_health++;
+            //Enemy.m_health++;
+            //Boss.m_health++;
         }
         else {
-            for (int i = 0; i < waveNumber; i++)
+            if(wavePattern[Random.Range(0, wavePattern.Length)] == "sinus")
             {
-                SpawnEnemy(waveNumber);
-                yield return new WaitForSeconds(m_spawnRate);
+                for (int i = 0; i < waveNumber; i++)
+                {
+                    if (i % 7 == 0)
+                    {
+                        direction *= -1;
+                    }
+                    SpawnEnemy(waveNumber, 6 + (2*direction) * (i % 7));
+                    yield return new WaitForSeconds(m_spawnRate);
+                }
+                direction = 1;
             }
-            /*
-            
-             */
+            else if (wavePattern[Random.Range(0, wavePattern.Length)] == "line")
+            {
+                for (int i = 0; i < waveNumber; i++)
+                {
+                    if(i%7 == 0)
+                        yield return new WaitForSeconds(spawnRateLine);
+                    SpawnEnemy(waveNumber, -6 + 2 * (i % 7));
+                }
+            }
+            // default : random
+            else
+            {
+                for (int i = 0; i < waveNumber; i++)
+                {
+                    SpawnEnemy(waveNumber, Random.Range(-6, 6));
+                    yield return new WaitForSeconds(m_spawnRate);
+                }
+            }
         }
         timeBetweenWaves++;
     }
 
-    void SpawnEnemy(int index)
+    void SpawnEnemy(int index, int posX)
     {
         if (index <= 10)
-            Instantiate(m_enemy[0], new Vector3(Random.Range(-6, 6), 15, 0), Quaternion.identity);
+            Instantiate(m_enemy[0], new Vector3(posX, 15, 0), Quaternion.identity);
         else if (index <= 20)
-            Instantiate(m_enemy[(int)Random.Range(0, 2)], new Vector3(Random.Range(-6, 6), 15, 0), Quaternion.identity);
+            Instantiate(m_enemy[(int)Random.Range(0, 2)], new Vector3(posX, 15, 0), Quaternion.identity);
         else if (index <= 30)
-            Instantiate(m_enemy[(int)Random.Range(0, m_enemy.Length)], new Vector3(Random.Range(-6, 6), 15, 0), Quaternion.identity);
+            Instantiate(m_enemy[(int)Random.Range(0, m_enemy.Length)], new Vector3(posX, 15, 0), Quaternion.identity);
         else if (index <= 40)
-            Instantiate(m_enemy[(int)Random.Range(1, m_enemy.Length)], new Vector3(Random.Range(-6, 6), 15, 0), Quaternion.identity);
+            Instantiate(m_enemy[(int)Random.Range(1, m_enemy.Length)], new Vector3(posX, 15, 0), Quaternion.identity);
         else
-            Instantiate(m_enemy[(int)Random.Range(2, m_enemy.Length)], new Vector3(Random.Range(-6, 6), 15, 0), Quaternion.identity);
+            Instantiate(m_enemy[(int)Random.Range(2, m_enemy.Length)], new Vector3(posX, 15, 0), Quaternion.identity);
     }
     
     void SpawnBoss(int wave)

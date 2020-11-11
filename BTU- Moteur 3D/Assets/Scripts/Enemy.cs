@@ -6,7 +6,7 @@ public class Enemy : MonoBehaviour
 {
     Rigidbody2D rb;
     [SerializeField] float m_enemySpeed;
-    [SerializeField] public static int m_health;
+    [SerializeField] int m_health;
     [SerializeField] bool canShoot;
     [SerializeField] int fireRate;
     [SerializeField] GameObject bulletPrefab;
