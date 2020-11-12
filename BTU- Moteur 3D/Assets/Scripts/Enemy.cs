@@ -6,12 +6,14 @@ public class Enemy : MonoBehaviour
 {
     Rigidbody2D rb;
     [SerializeField] float m_enemySpeed;
-    [SerializeField] int m_health;
+    [SerializeField] int m_maxHealth;
     [SerializeField] bool canShoot;
     [SerializeField] int fireRate;
     [SerializeField] GameObject bulletPrefab;
     [SerializeField] int score;
     [SerializeField] GameObject[] m_booster;
+
+    int m_health;
 
     // Start is called before the first frame update
     void Awake()
@@ -32,6 +34,7 @@ public class Enemy : MonoBehaviour
 
     void Start()
     {
+        m_health = m_maxHealth;
         if (canShoot)
             InvokeRepeating("Shoot", fireRate, fireRate);
     }
@@ -75,5 +78,12 @@ public class Enemy : MonoBehaviour
     void BoosterSpawn()
     {
         Instantiate(m_booster[(int)Random.Range(0, m_booster.Length)], transform.position, Quaternion.identity);
+        if (Player.multishot == true)
+            Instantiate(m_booster[(int)Random.Range(1, m_booster.Length)], transform.position, Quaternion.identity);
+    }
+
+    public void AddHealth()
+    {
+        m_health ++;
     }
 }

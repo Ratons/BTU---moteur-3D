@@ -22,7 +22,7 @@ public class EditStatText : MonoBehaviour
         if (playerRef)
         {
             Att = Player.damage;                                                //Récupération dégats du Joueur
-            AttSpd = playerRef.GetComponent<Player>().GetFireSpeed() / 750 ;    //Récupération et normalisation Vitesse d'Attaque
+            AttSpd = 2 - playerRef.GetComponent<Player>().GetFireSpeed() / 750 ;    //Récupération et normalisation Vitesse d'Attaque
             Spd = playerRef.GetComponent<Player>().GetSpeed() / 3;              //Récupération et normalisation Vitesse
 
             //Affichage

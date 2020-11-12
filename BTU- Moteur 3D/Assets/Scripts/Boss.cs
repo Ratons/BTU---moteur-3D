@@ -7,7 +7,7 @@ public class Boss : MonoBehaviour
 {
     Rigidbody2D rb;
     [SerializeField] float m_enemySpeed;
-    [SerializeField] int m_health;
+    [SerializeField] int m_maxHealth;
     [SerializeField] int fireRate;
     [SerializeField] GameObject bulletPrefab;
     [SerializeField] int score;
@@ -16,6 +16,7 @@ public class Boss : MonoBehaviour
 
     Stopwatch m_fireTimer;
     int direction = 1;
+    int m_health;
 
     // Start is called before the first frame update
     void Awake()
@@ -46,6 +47,7 @@ public class Boss : MonoBehaviour
 
     void Start()
     {
+        m_health = m_maxHealth;
         InvokeRepeating("Shoot", 5, fireRate);
     }
 
@@ -110,5 +112,12 @@ public class Boss : MonoBehaviour
     void BoosterSpawn()
     {
         Instantiate(m_booster[(int)Random.Range(0, m_booster.Length)], transform.position, Quaternion.identity);
+        if(Player.multishot == true)
+            Instantiate(m_booster[(int)Random.Range(1, m_booster.Length)], transform.position, Quaternion.identity);
+    }
+
+    public void AddHealth()
+    {
+        m_health += 5;
     }
 }

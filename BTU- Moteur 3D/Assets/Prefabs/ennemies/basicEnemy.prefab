@@ -47,17 +47,17 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_enemySpeed: 1
-  m_health: 1
+  m_maxHealth: 1
   canShoot: 0
   fireRate: 0
   bulletPrefab: {fileID: 0}
   score: 10
   m_booster:
-  - {fileID: 610484604960533432, guid: 472d197ac56a882458469c38aafede4a, type: 3}
+  - {fileID: 8609555749614555575, guid: baa82122ce1b684498aed6314e74e373, type: 3}
   - {fileID: 884908169295505061, guid: 89867be1f48e6b9408e8e2d9bdd2f0ae, type: 3}
   - {fileID: 6997507764483238452, guid: 77ba1f18532b4fc42b52d0304b79b411, type: 3}
   - {fileID: 1476143528253385533, guid: c9894f269e1c8ce41b8a236f19022b54, type: 3}
-  - {fileID: 8609555749614555575, guid: baa82122ce1b684498aed6314e74e373, type: 3}
+  - {fileID: 610484604960533432, guid: 472d197ac56a882458469c38aafede4a, type: 3}
   - {fileID: 5670816229157912788, guid: 948ebe6d921d7214fbf59d50cb38cb56, type: 3}
 --- !u!50 &-4080734527738693335
 Rigidbody2D:

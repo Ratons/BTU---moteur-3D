@@ -18,7 +18,7 @@ public class Player : MonoBehaviour
     [SerializeField] int numOfHearts;
 
     public static int damage = 1;
-    bool multishot = false;
+    public static bool multishot = false;
 
 
     [SerializeField] Image[] hearts;
@@ -176,13 +176,17 @@ public class Player : MonoBehaviour
 
     public void AddSpeed()
     {
-        m_VerticalSpeed += 0.2f;
-        m_HorizontalSpeed += 0.2f;
+        if (m_VerticalSpeed < 10)
+        {
+            m_VerticalSpeed += 0.2f;
+            m_HorizontalSpeed += 0.2f;
+        }
     }
 
     public void AddAttackSpeed()
     {
-        m_fireRate -= 25;
+        if(m_fireRate > 100)
+            m_fireRate -= 25;
     }
 
     public void AddMultishot()

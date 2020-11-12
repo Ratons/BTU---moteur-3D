@@ -19,6 +19,10 @@ PrefabInstance:
       propertyPath: type
       value: minions
       objectReference: {fileID: 0}
+    - target: {fileID: 3225246196930078341, guid: d0fe0c0ca81f654469b0a89940477db2, type: 3}
+      propertyPath: m_maxHealth
+      value: 10
+      objectReference: {fileID: 0}
     - target: {fileID: 5902531690785757248, guid: d0fe0c0ca81f654469b0a89940477db2, type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 

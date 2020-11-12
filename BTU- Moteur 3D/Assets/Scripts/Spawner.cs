@@ -37,22 +37,21 @@ public class Spawner : MonoBehaviour
         if(waveNumber < 30)
             waveNumber++;
         waveNumberBis++;
+        
         if (waveNumberBis % bossWave == 0)
         {
             SpawnBoss(waveNumberBis);
-            //Enemy.m_health++;
-            //Boss.m_health++;
         }
         else {
             if(wavePattern[Random.Range(0, wavePattern.Length)] == "sinus")
             {
                 for (int i = 0; i < waveNumber; i++)
                 {
-                    if (i % 7 == 0)
+                    if (i % 6 == 0)
                     {
                         direction *= -1;
                     }
-                    SpawnEnemy(waveNumber, 6 + (2*direction) * (i % 7));
+                    SpawnEnemy(waveNumber, (-6*direction) + (2*direction) * (i % 6));
                     yield return new WaitForSeconds(m_spawnRate);
                 }
                 direction = 1;
@@ -77,6 +76,15 @@ public class Spawner : MonoBehaviour
             }
         }
         timeBetweenWaves++;
+        if (waveNumberBis % 10 == 0)
+        {
+            for (int l = 0; l < m_enemy.Length; l++)
+                m_enemy[l].gameObject.GetComponent<Enemy>().AddHealth();
+            for (int l = 0; l < m_boss.Length; l++)
+                m_boss[l].gameObject.GetComponent<Boss>().AddHealth();
+            for (int l = 0; l < m_minions.Length; l++)
+                m_minions[l].gameObject.GetComponent<Boss>().AddHealth();
+        }
     }
 
     void SpawnEnemy(int index, int posX)
