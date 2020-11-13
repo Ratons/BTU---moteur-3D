@@ -26,9 +26,9 @@ public class EditStatText : MonoBehaviour
             Spd = playerRef.GetComponent<Player>().GetSpeed() / 3;              //Récupération et normalisation Vitesse
 
             //Affichage
-            AttText.GetComponent<Text>().text = Att + " ";
-            AttSpdText.GetComponent<Text>().text = AttSpd + " ";
-            SpdText.GetComponent<Text>().text = Spd + " ";
+            AttText.GetComponent<Text>().text = Att.ToString("F3");
+            AttSpdText.GetComponent<Text>().text = AttSpd.ToString("F3");
+            SpdText.GetComponent<Text>().text = Spd.ToString("F3");
         }
     }
 }

@@ -10,6 +10,6 @@ public class PlayerScore : MonoBehaviour
 
     void Update()
     {
-        ScoreText.GetComponent<Text>().text = Score+" ";
+        ScoreText.GetComponent<Text>().text = Score.ToString();
     }
 }

@@ -141,14 +141,26 @@ public class Player : MonoBehaviour
     {
         health--;
         HealthManagement();
-        if (health == 0)
+        if (health == 0) //On vérifie la mort, si le joueur est mort, on finit la partie
         {
-            EndGameMenu.SetActive(true);
-            Time.timeScale = 0f;
-            PauseMenuScript.GameIsPaused = true;
-            AudioListener.pause = true;
-            Destroy(gameObject);
+            EndgameManagement();
         }
+    }
+
+    void EndgameManagement()
+    {
+        EndGameMenu.SetActive(true);                //On affiche l'écran de fin
+        Time.timeScale = 0f;                        //On arrete le jeu
+        PauseMenuScript.GameIsPaused = true;        
+        AudioListener.pause = true;                 //On arrete la musique
+        if (PlayerPrefs.HasKey("BestRecord"))       //On regarde s'il y a déjà un record
+        {
+            if (PlayerScore.Score > PlayerPrefs.GetInt("BestRecord")) //si le nouveau score est plus grand, on remplace l'ancien record par le nouveau
+                PlayerPrefs.SetInt("BestRecord", PlayerScore.Score);
+        }
+        else                                        //S'il n'y a pas de record, on enregistre ce score comme record
+            PlayerPrefs.SetInt("BestRecord", PlayerScore.Score);
+        Destroy(gameObject);                        //et enfin on détruit l'actor player
     }
 
     public void AddDamage()
