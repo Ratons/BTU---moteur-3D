@@ -5,62 +5,70 @@ using UnityEngine;
 public class Bullet : MonoBehaviour
 
 {
+    // Rigibody of the game object
     Rigidbody2D rb;
+
+    [Tooltip("speed of the bullet")]
     [SerializeField] int m_BulletSpeed;
+
+    [Tooltip("size of the bullet")]
     [SerializeField] int m_BulletSize;
+
+    [Tooltip("direction of the bullet")]
     [SerializeField] bool direction;
 
     void Awake()
     {
-        rb = GetComponent<Rigidbody2D>();
+        rb = GetComponent<Rigidbody2D>();   // set the rigibody
     }
 
+    // bullet basics movements
     void BulletControl()
     {
-        if(direction==true)
-            transform.Translate(new Vector3(0, 1, 0) * m_BulletSpeed * Time.deltaTime);
-        if(direction==false)
-            transform.Translate(new Vector3(0, -1, 0) * m_BulletSpeed * Time.deltaTime);
+        if(direction==true)                                                                 // shoot up
+            transform.Translate(new Vector3(0, 1, 0) * m_BulletSpeed * Time.deltaTime);     // movement
+        if(direction==false)                                                                // shoot down
+            transform.Translate(new Vector3(0, -1, 0) * m_BulletSpeed * Time.deltaTime);    
 
-        if (transform.position.y > 11) // condition percuter un ennemi
+        if (transform.position.y > 11)                                                      // if the bullet goes out of the top of the screen
         {
-            Destroy(this.gameObject);
+            Destroy(this.gameObject);                                                       // destroy the bullet
         }
     }
 
-    // Start is called before the first frame update
     void Start()
     {
         
     }
 
-    // Update is called once per frame
     void Update()
     {
-        BulletControl();
+        BulletControl();    // basics movements
     }
 
+    // actions done when the bullet is colliding on other objects
     void OnCollisionEnter2D(Collision2D col)
     {
-        if (col.gameObject.tag == "Player")
+        if (col.gameObject.tag == "Player")                             // if the collider is the player
         {
-            col.gameObject.GetComponent<Player>().Damage();
+            col.gameObject.GetComponent<Player>().Damage();             // the player is damaged
+            Die();                                                      // the bullet dies
+        }
+        else if (col.gameObject.tag == "Enemy")                         // if the collider is an enemy
+        {
+            col.gameObject.GetComponent<Enemy>().Damage(Player.damage); // the enemy is damaged
             Die();
         }
-        else if (col.gameObject.tag == "Enemy")
+        else if (col.gameObject.tag == "Boss")                          // if the collider is a boss
         {
-            col.gameObject.GetComponent<Enemy>().Damage(Player.damage);
-            Die();
-        }
-        else if (col.gameObject.tag == "Boss")
-        {
-            col.gameObject.GetComponent<Boss>().Damage(Player.damage);
+            col.gameObject.GetComponent<Boss>().Damage(Player.damage);  // the boss is damaged
             Die();
         }
     }
 
+    // actions done when the bullet dies
     public void Die()
     {
-        Destroy(gameObject);
+        Destroy(gameObject);    // destroy the bullet
     }
 }

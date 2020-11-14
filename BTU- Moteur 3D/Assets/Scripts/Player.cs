@@ -9,29 +9,49 @@ using UnityEngine.UI;
 
 public class Player : MonoBehaviour
 {
+    [Tooltip("main camera prefab")]
     [SerializeField] Camera m_MainCamera;
+
+    [Tooltip("player vertical speed")]
     [SerializeField] float m_VerticalSpeed;
+
+    [Tooltip("player horizontal speed")]
     [SerializeField] float m_HorizontalSpeed;
+
+    [Tooltip("player attack speed")]
     [SerializeField] float m_fireRate;
+
+    [Tooltip("bullet prefab")]
     [SerializeField] GameObject m_bulletPrefab;
+
+    [Tooltip("player health")]
     [SerializeField] int health;
+
+    [Tooltip("hearts number")]
     [SerializeField] int numOfHearts;
 
-    public static int damage = 1;
-    public static bool multishot = false;
-
-
+    // TO DO
     [SerializeField] Image[] hearts;
+
+    // TO DO
     [SerializeField] Sprite fullHeart;
+
+    // TO DO
     [SerializeField] Sprite emptyHeart;
 
+    // TO DO
     [SerializeField] GameObject EndGameMenu;
+
+    // player damage
+    public static int damage = 1;
+    // is multishot activated
+    public static bool multishot = false;
 
     Rigidbody2D rb;
     Stopwatch stopWatch;
     Stopwatch m_fireTimer;
 
-    //Controle du vaisseau
+    //TO DO
     void PlayerControl()
     {
         //Horizontal
@@ -84,14 +104,15 @@ public class Player : MonoBehaviour
 
     void Awake()
     {
-        rb = GetComponent<Rigidbody2D>();
-        stopWatch = new Stopwatch();
-        stopWatch.Start();
+        rb = GetComponent<Rigidbody2D>();   // set the rigibody
+        stopWatch = new Stopwatch();        // set the stopwatch
+        stopWatch.Start();                  // start the stopwatch
 
-        m_fireTimer = new Stopwatch();
-        m_fireTimer.Start();
+        m_fireTimer = new Stopwatch();      // set the fireTimer
+        m_fireTimer.Start();                // start the fireTimer
     }
 
+    // TO DO
     void HealthManagement()
     {
         if (health > numOfHearts)
@@ -119,34 +140,34 @@ public class Player : MonoBehaviour
             }
         }
     }
-    // Start is called before the first frame update
+
     void Start()
     {
         HealthManagement();
 
-        //On assure que le jeu n'est pas figé et on reset le score à 0
-        Time.timeScale = 1f;
-        PauseMenuScript.GameIsPaused = false;
-        AudioListener.pause = false;
-        PlayerScore.Score = 0;
+        Time.timeScale = 1f;                    // TO DO On assure que le jeu n'est pas figé et on reset le score à 0
+        PauseMenuScript.GameIsPaused = false;   // TO DO
+        AudioListener.pause = false;            // TO DO
+        PlayerScore.Score = 0;                  // set score to 0
     }
 
-    // Update is called once per frame
     void Update()
     {
-        PlayerControl();
+        PlayerControl();    // basics movements
     }
 
+    // damages to the player
     public void Damage()
     {
-        health--;
-        HealthManagement();
-        if (health == 0) //On vérifie la mort, si le joueur est mort, on finit la partie
+        health--;                   // decrease health
+        HealthManagement();         // TO DO
+        if (health == 0)            //if player health equal 0 it dies
         {
-            EndgameManagement();
+            EndgameManagement();    // TO DO
         }
     }
 
+    // TO DO
     void EndgameManagement()
     {
         EndGameMenu.SetActive(true);                //On affiche l'écran de fin
@@ -163,11 +184,13 @@ public class Player : MonoBehaviour
         Destroy(gameObject);                        //et enfin on détruit l'actor player
     }
 
+    // increse damages
     public void AddDamage()
     {
         damage++;
     }
 
+    // heal
     public void AddHealth()
     {
         if (health < numOfHearts)
@@ -177,6 +200,7 @@ public class Player : MonoBehaviour
         }
     }
 
+    // increase maximum health
     public void AddMaxHealth()
     {
         if (numOfHearts < 10)
@@ -186,6 +210,7 @@ public class Player : MonoBehaviour
         }
     }
 
+    // increase horizontal and vertical speed
     public void AddSpeed()
     {
         if (m_VerticalSpeed < 10)
@@ -195,22 +220,26 @@ public class Player : MonoBehaviour
         }
     }
 
+    // increase attack speed
     public void AddAttackSpeed()
     {
         if(m_fireRate > 100)
             m_fireRate -= 25;
     }
 
+    // activate multishot
     public void AddMultishot()
     {
-        multishot = true;
+        multishot = true;  
     }
 
+    // horizontalSpeed getter
     public float GetSpeed()
     {
         return m_HorizontalSpeed;
     }
 
+    // fireRate getter 
     public float GetFireSpeed()
     {
         return m_fireRate;
