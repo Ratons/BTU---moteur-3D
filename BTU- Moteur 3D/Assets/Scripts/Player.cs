@@ -30,16 +30,16 @@ public class Player : MonoBehaviour
     [Tooltip("hearts number")]
     [SerializeField] int numOfHearts;
 
-    // TO DO
+    [Tooltip("UI life")]
     [SerializeField] Image[] hearts;
 
-    // TO DO
+    [Tooltip("FullHeart sprite")]
     [SerializeField] Sprite fullHeart;
 
-    // TO DO
+    [Tooltip("EmptyHeart sprite")]
     [SerializeField] Sprite emptyHeart;
 
-    // TO DO
+    [Tooltip("GameOver Screen")]
     [SerializeField] GameObject EndGameMenu;
 
     // player damage
@@ -51,7 +51,10 @@ public class Player : MonoBehaviour
     Stopwatch stopWatch;
     Stopwatch m_fireTimer;
 
-    //TO DO
+    /*on utilise les inputs entrés dans les ProjectSettings,  
+     si une touche qui modifie un axe horizontal/vertical
+    etst appuyée, on calcule la translation de notre joueur
+    avec la valeur de cette touche selon l'axe (-1 ou 1)*/
     void PlayerControl()
     {
         //Horizontal
@@ -112,31 +115,32 @@ public class Player : MonoBehaviour
         m_fireTimer.Start();                // start the fireTimer
     }
 
-    // TO DO
+
+    //Fonction pour gérer l'aspect de la "barre" de vie en jeu
     void HealthManagement()
     {
-        if (health > numOfHearts)
+        if (health > numOfHearts) //Si la vie dépasse le maximum possible, on la réajuste au maximum de vie possible
         {
             health = numOfHearts;
         }
 
-        for (int i = 0; i < hearts.Length; i++)
+        for (int i = 0; i < hearts.Length; i++)     //boucle pour gérer l'aspect des coeurs
         {
-            if (i < health)
+            if (i < health)                         //tous les coeurs sous le seuil de vie obtiennent l'apparence d
             {
                 hearts[i].sprite = fullHeart;
             }
-            else
+            else                                    //Sinon, ils ont l'apparence du coeur vide
             {
                 hearts[i].sprite = emptyHeart;
             }
-            if (i < numOfHearts)
+            if (i < numOfHearts)                    //numOfHearts corresponds à la vie maximum du joueur actuellement
             {
-                hearts[i].enabled = true;
+                hearts[i].enabled = true;           //Nous avons prévu une liste de 10 coeurs max donc nous n'affichons que les coeurs dont le joueur dispose actuellement
             }
             else
             {
-                hearts[i].enabled = false;
+                hearts[i].enabled = false;          //et les autres ne sont pas apparents
             }
         }
     }
@@ -145,9 +149,9 @@ public class Player : MonoBehaviour
     {
         HealthManagement();
 
-        Time.timeScale = 1f;                    // TO DO On assure que le jeu n'est pas figé et on reset le score à 0
-        PauseMenuScript.GameIsPaused = false;   // TO DO
-        AudioListener.pause = false;            // TO DO
+        Time.timeScale = 1f;                    // On autorise le temps du jeu à découler normalement
+        PauseMenuScript.GameIsPaused = false;   
+        AudioListener.pause = false;            // On enleve la pause de la musique
         PlayerScore.Score = 0;                  // set score to 0
     }
 
@@ -160,10 +164,10 @@ public class Player : MonoBehaviour
     public void Damage()
     {
         health--;                   // decrease health
-        HealthManagement();         // TO DO
+        HealthManagement();         // Fonction réalisant la gestion de l'aspect visuel de la vie
         if (health == 0)            //if player health equal 0 it dies
         {
-            EndgameManagement();    // TO DO
+            EndgameManagement();    // Quand le joueur meurt, on appel la fonction qui réalise le gameOver
         }
     }
 
