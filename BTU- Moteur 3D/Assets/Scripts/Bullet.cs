@@ -30,7 +30,7 @@ public class Bullet : MonoBehaviour
         if(direction==false)                                                                // shoot down
             transform.Translate(new Vector3(0, -1, 0) * m_BulletSpeed * Time.deltaTime);    
 
-        if (transform.position.y > 11)                                                      // if the bullet goes out of the top of the screen
+        if (transform.position.y > 11 || transform.position.y < -5)                         // if the bullet goes out of the top of the screen
         {
             Destroy(this.gameObject);                                                       // destroy the bullet
         }

@@ -39,6 +39,13 @@ public class Spawner : MonoBehaviour
     // direction for the sinus wave
     int direction = 1;
 
+    void Start()
+    {
+        waveNumber = 0;
+        nbEnemies = 0;
+        enemyLeft = 0;
+    }
+
     void Update()
     {
         if(countdown <= 0f)                     // if countdown equal 0

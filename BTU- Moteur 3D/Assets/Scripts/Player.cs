@@ -78,7 +78,7 @@ public class Player : MonoBehaviour
             transform.Translate(new Vector3(0, verticalInput, 0) * m_HorizontalSpeed * Time.deltaTime);
         }
         if (Input.GetAxis("Vertical") > 0 &&
-                m_MainCamera.WorldToScreenPoint(transform.position).y < Screen.height - m_VerticalSpeed * Time.deltaTime)
+                transform.position.y < 9)
         {
             float verticalInput = Input.GetAxis("Vertical");
             transform.Translate(new Vector3(0, verticalInput, 0) * m_HorizontalSpeed * Time.deltaTime);
@@ -148,6 +148,7 @@ public class Player : MonoBehaviour
     void Start()
     {
         HealthManagement();
+        damage = 1;
 
         Time.timeScale = 1f;                    // On autorise le temps du jeu à découler normalement
         PauseMenuScript.GameIsPaused = false;   
@@ -172,8 +173,10 @@ public class Player : MonoBehaviour
     }
 
     // TO DO
-    void EndgameManagement()
+    public void EndgameManagement()
     {
+        health = 0;                                 //Pour ne pas afficher les coeurs
+        HealthManagement();
         EndGameMenu.SetActive(true);                //On affiche l'écran de fin
         Time.timeScale = 0f;                        //On arrete le jeu
         PauseMenuScript.GameIsPaused = true;        
@@ -210,8 +213,10 @@ public class Player : MonoBehaviour
         if (numOfHearts < 10)
         { 
             numOfHearts++;
-            HealthManagement();
+            
         }
+        health++;
+        HealthManagement();
     }
 
     // increase horizontal and vertical speed

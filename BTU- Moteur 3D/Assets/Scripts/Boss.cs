@@ -78,7 +78,6 @@ public class Boss : MonoBehaviour
         // first bullet
         Bullet bullet = Instantiate(bulletPrefab).GetComponent<Bullet>();               // create a bullet
         bullet.transform.position = transform.position + new Vector3(-0.5f, -1f, 0);    // set the bullet position
-        //bullet.transform.rotation = transform.rotation + new Vector3(-45, 0, 0);
 
         // second bullet
         Bullet bullet2 = Instantiate(bulletPrefab).GetComponent<Bullet>();
@@ -110,10 +109,10 @@ public class Boss : MonoBehaviour
     // actions done when the boss is colliding on other objects
     void OnCollisionEnter2D(Collision2D col)
     {
-        if (col.gameObject.tag == "Player")                     // if the collider is the player
+        if (col.gameObject.tag == "Player")                                 // if the collider is the player
         {
-            col.gameObject.GetComponent<Player>().Damage();     // the player is damaged
-            Damage(Player.damage);                              // the boss is damaged
+            col.gameObject.GetComponent<Player>().EndgameManagement();      // the player is damaged
+            Damage(Player.damage);                                          // the boss is damaged
         }
     }
 
