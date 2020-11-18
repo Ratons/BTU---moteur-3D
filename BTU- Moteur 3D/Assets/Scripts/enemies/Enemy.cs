@@ -83,9 +83,12 @@ public class Enemy : MonoBehaviour
     // damages dealt to the enemy
     public void Damage()
     {
-        m_health --;          // decrease health of the enemy
-        if (m_health <= 0)    // when the enemy health is equal to 0 it dies
-            Die();
+        if (m_health > 0)
+        {
+            m_health--;          // decrease health of the enemy
+            if (m_health <= 0)    // when the enemy health is equal to 0 it dies
+                Die();
+        }
     }
 
     // actions done when the enemy dies

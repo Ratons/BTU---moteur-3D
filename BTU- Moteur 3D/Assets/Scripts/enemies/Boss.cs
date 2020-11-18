@@ -122,9 +122,12 @@ public class Boss : MonoBehaviour
     // damages dealt to the boss
     public void Damage()
     {
-        m_health--;         // decrease health of the boss
-        if (m_health <= 0)  // when the boss health is equal to 0 it dies
-            Die();
+        if (m_health > 0)
+        {
+            m_health--;         // decrease health of the boss
+            if (m_health <= 0)  // when the boss health is equal to 0 it dies
+                Die();
+        }
     }
 
     // actions done when the boss dies
