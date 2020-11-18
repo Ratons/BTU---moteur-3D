@@ -77,7 +77,7 @@ public class Spawner : MonoBehaviour
                     {
                         direction *= -1;                                                // change the direction for the sinus pattern
                     }
-                    SpawnEnemy(nbEnemies, (-6*direction) + (2*direction) * (i % 6));    // spawn enemy
+                    SpawnEnemy(i, waveNumber, (-6*direction) + (2*direction) * (i % 6));    // spawn enemy
                     yield return new WaitForSeconds(m_spawnRate);                       // wait before spawning the next enemy
                 }
                 direction = 1;
@@ -88,7 +88,7 @@ public class Spawner : MonoBehaviour
                 {
                     if(i%7 == 0)
                         yield return new WaitForSeconds(spawnRateLine);
-                    SpawnEnemy(nbEnemies, -6 + 2 * (i % 7));
+                    SpawnEnemy(i, waveNumber, -6 + 2 * (i % 7));
                 }
             }
             // default : random
@@ -96,7 +96,7 @@ public class Spawner : MonoBehaviour
             {
                 for (int i = 0; i < nbEnemies; i++)
                 {
-                    SpawnEnemy(nbEnemies, Random.Range(-6, 6));
+                    SpawnEnemy(i, waveNumber, Random.Range(-6, 6));
                     yield return new WaitForSeconds(m_spawnRate);
                 }
             }
@@ -104,26 +104,20 @@ public class Spawner : MonoBehaviour
         timeBetweenWaves++;                                                             // increase the time between each wave
         if (waveNumber % 10 == 0)                                                       // each 10 waves increase health of all enemies, bosses and minions
         {
-            for (int l = 0; l < m_enemy.Length; l++)
-                m_enemy[l].gameObject.GetComponent<Enemy>().AddHealth();
-            for (int l = 0; l < m_boss.Length; l++)
-                m_boss[l].gameObject.GetComponent<Boss>().AddHealth();
-            for (int l = 0; l < m_minions.Length; l++)
-                m_minions[l].gameObject.GetComponent<Boss>().AddHealth();
+            Enemy.tmp++;
+            Boss.tmp += 5;
         }
     }
 
     // define which enemy spawn each waves
-    void SpawnEnemy(int index, int posX)
+    void SpawnEnemy(int index, int wave, int posX)
     {
-        if (index <= 10)                                                                                                // if current wave is 10 or less
-            Instantiate(m_enemy[0], new Vector3(posX, 15, 0), Quaternion.identity);                                     // spawn basic enemy
-        else if (index <= 20)                                                                                           // if current wave is 20 or less
-            Instantiate(m_enemy[(int)Random.Range(0, 2)], new Vector3(posX, 15, 0), Quaternion.identity);               // spawn basic + firing enemies
-        else if (index <= 30)                                                                                           // if current wave is 30 or less
-            Instantiate(m_enemy[(int)Random.Range(0, m_enemy.Length)], new Vector3(posX, 15, 0), Quaternion.identity);  // spawn all enemies
-        else                                                                                  
-            Instantiate(m_enemy[(int)Random.Range(1, m_enemy.Length)], new Vector3(posX, 15, 0), Quaternion.identity);  // spawn firing + tank enemies
+        if(index <= 10 && wave <= 30)
+            Instantiate(m_enemy[0], new Vector3(posX, 15, 0), Quaternion.identity);
+        else if(index <= 20 && wave > 10)
+            Instantiate(m_enemy[1], new Vector3(posX, 15, 0), Quaternion.identity);
+        else if(index <= 30 && wave > 20)
+            Instantiate(m_enemy[2], new Vector3(posX, 15, 0), Quaternion.identity);
     }
     
     // spawn boss wave

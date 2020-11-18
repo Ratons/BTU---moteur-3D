@@ -49,19 +49,21 @@ public class Bullet : MonoBehaviour
     // actions done when the bullet is colliding on other objects
     void OnCollisionEnter2D(Collision2D col)
     {
-        if (col.gameObject.tag == "Player")                             // if the collider is the player
+        if (col.gameObject.tag == "Player")                                 // if the collider is the player
         {
-            col.gameObject.GetComponent<Player>().Damage();             // the player is damaged
-            Die();                                                      // the bullet dies
+            col.gameObject.GetComponent<Player>().Damage();                 // the player is damaged
+            Die();                                                          // the bullet dies
         }
-        else if (col.gameObject.tag == "Enemy")                         // if the collider is an enemy
+        else if (col.gameObject.tag == "Enemy")                             // if the collider is an enemy
         {
-            col.gameObject.GetComponent<Enemy>().Damage(Player.damage); // the enemy is damaged
+            for(int i = 0; i<Player.damage; i++)
+                col.gameObject.GetComponent<Enemy>().Damage();              // the enemy is damaged
             Die();
         }
-        else if (col.gameObject.tag == "Boss")                          // if the collider is a boss
+        else if (col.gameObject.tag == "Boss")                              // if the collider is a boss
         {
-            col.gameObject.GetComponent<Boss>().Damage(Player.damage);  // the boss is damaged
+            for (int i = 0; i < Player.damage; i++)
+                col.gameObject.GetComponent<Boss>().Damage();  // the boss is damaged
             Die();
         }
     }
