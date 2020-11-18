@@ -149,6 +149,7 @@ public class Player : MonoBehaviour
     {
         HealthManagement();
         damage = 1;
+        multishot = false;
 
         Time.timeScale = 1f;                    // On autorise le temps du jeu à découler normalement
         PauseMenuScript.GameIsPaused = false;   
